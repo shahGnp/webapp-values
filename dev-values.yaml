@@ -1,1 +1,3 @@
-outText: "-text=helloFromWebAppCustomValues"
+outText: "-text=thisIsADevEnv"
+path: /apple-dev
+appName: apple-dev

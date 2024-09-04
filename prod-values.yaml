@@ -1,0 +1,3 @@
+outText: "-text=thisIsAProdEnv"
+path: /apple-prod
+appName: apple-prod

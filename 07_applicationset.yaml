@@ -1,0 +1,39 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: helm-applications
+  namespace: argocd
+spec:
+  generators:
+    - list:
+        elements:
+          - name: apple-dev
+            valuesFile: dev-values.yaml
+            namespace: apple-dev
+          - name: apple-prod
+            valuesFile: staging-values.yaml
+            namespace: apple-staging
+          - name: apple-stage
+            valuesFile: prod-values.yaml
+            namespace: spple-prod
+  template:
+    metadata:
+      name: '{{name}}'
+    spec:
+      project: default
+      source:
+        repoURL: https://github.com/shahgnp/webapp.git
+        path: .
+        targetRevision: HEAD # Branch, tag, or commit
+        helm:
+          valuesFiles:
+            - '{{valuesFile}}'
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: '{{namespace}}'
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=true
