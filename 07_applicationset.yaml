@@ -22,12 +22,15 @@ spec:
     spec:
       project: default
       source:
-        repoURL: https://github.com/shahgnp/webapp.git
+      - repoURL: https://github.com/shahgnp/webapp.git
         path: .  # Ensure this path is correct
         targetRevision: HEAD
         helm:
-          valuesFiles:
-            - '{{valuesFile}}'  # Corrected the values file reference
+          - $values/{{ valuesFile}}
+
+      - repoURL: 'https://github.com/shahGnp/webapp-values.git'
+        targetRevision: HEAD
+        ref: values
       destination:
         server: https://kubernetes.default.svc
         namespace: '{{namespace}}'
