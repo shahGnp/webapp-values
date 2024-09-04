@@ -27,7 +27,7 @@ spec:
         targetRevision: HEAD # Branch, tag, or commit
         helm:
           valuesFiles:
-            - '{{valuesFile}}'
+            - $values/'{{valuesFile}}'
       destination:
         server: https://kubernetes.default.svc
         namespace: '{{namespace}}'
