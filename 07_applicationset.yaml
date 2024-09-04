@@ -15,7 +15,7 @@ spec:
             namespace: apple-staging
           - name: apple-stage
             valuesFile: prod-values.yaml
-            namespace: spple-prod
+            namespace: apple-prod  # Corrected the typo here
   template:
     metadata:
       name: '{{name}}'
@@ -23,11 +23,11 @@ spec:
       project: default
       source:
         repoURL: https://github.com/shahgnp/webapp.git
-        path: .
-        targetRevision: HEAD # Branch, tag, or commit
+        path: .  # Ensure this path is correct
+        targetRevision: HEAD
         helm:
           valuesFiles:
-            - $values/'{{valuesFile}}'
+            - '{{valuesFile}}'  # Corrected the values file reference
       destination:
         server: https://kubernetes.default.svc
         namespace: '{{namespace}}'
